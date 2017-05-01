@@ -65,3 +65,8 @@ footer {
 footer .heart {
   color:#cf2e31;
 }
+
+button {
+  width: 70px;
+  text-align: center;
+}

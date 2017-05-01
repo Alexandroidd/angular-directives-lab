@@ -10,23 +10,38 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/cardsController.js"></script>
+        <script src="scripts/directives/cardDirective.js"></script>
     </head>
     <body>
       <div class="container">
         <header class="navbar">
-          <h1 class="pull-left">Cards Against Assembly</h1>
-
+          <h1 class="pull-left">Cards Agast Assembly</h1>
           <scores></scores>
+          <br><br>
         </header>
+        <section id='cardForm' ng-controller='CardsController as cards'>
+        
+          <form ng-submit='cards.addCard()'>
+            <div>
+              <label for='newCard-name'>Question:</label>
+              <input type='text' id='newCard-name' ng-model='cards.newCard.question' placeholder='Put your question here'>
+            </div>
+            <div>
+              <input type='submit' value='Add Card'>
+            </div>
+          </form>
 
-        <section id="cards" class="container-fluid" ng-controller="CardsController as cardsController">
+          </form>
+          </section><br><br>
+
+
+        <section id="cards" class="container-fluid" ng-controller="CardsController as cards">
           <div class="row">
 
-            <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cardsController.questionsList" >
-              <div class="card">
-                <h4 class="card-title">{{card.question}}</h4>
-                <h6>Cards Against Assembly</h6>
-              </div>
+            <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cards.all">
+              <wdi-card question="{{card.question}}" id='{{card._id}}'>
+              </wdi-card>
+             <!--  <button class='delete' ng-click='cards.deleteCard(card._id)'>Delete</button> -->
             </div>
 
           </div>
